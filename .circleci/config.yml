@@ -16,11 +16,11 @@ jobs:
 
       - run:
           name: update package list
-          command: apt update
+          command: sudo apt update
 
       - run:
           name: install nodejs
-          command: apt install nodejs -y
+          command: sudo  apt install nodejs -y
 
       - run: node --version
 
