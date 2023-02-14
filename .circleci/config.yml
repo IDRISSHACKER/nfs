@@ -8,9 +8,9 @@ jobs:
       - checkout
 
       - run:
-        name: login to docker hub
-        command: |
-          echo "$DOCKERHUB_PASSWORD" | docker login --username idrissduval --password-stdin
+          name: login to docker hub
+          command: |
+            echo "$DOCKERHUB_PASSWORD" | docker login --username idrissduval --password-stdin
 
       - run: docker --version
 
