@@ -10,13 +10,8 @@ jobs:
     steps:
       - checkout
 
-      - run:
-          name: update package
-          command: apt update
-
-      - run:
-          name: install docker
-          command: apt install docker -y
+      - setup_remote_docker:
+          version: 20.10.20
 
       - run: docker --version
 
