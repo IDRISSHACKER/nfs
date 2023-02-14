@@ -21,6 +21,7 @@ import {TMP_PATH} from "./common/contant/env";
 import * as fs from "fs";
 import mine = require('mime-types');
 import {createReadStream} from "fs";
+import path = require("path")
 
 const DRIVER_ROUTE = "drive"
 
@@ -49,6 +50,8 @@ export class AppController {
 
       await this.appService.optimize(file.filename)
 
+      console.log(file.filename + "= uploaded")
+
       return {
         file: file.filename
       }
@@ -69,11 +72,11 @@ export class AppController {
       @Next() next: NextFunction,
   ) {
 
-    const path = this.appService.getFile(filePath, quality)
+    const pathFile = this.appService.getFile(filePath, quality)
 
     const rootToFile = join(
         process.cwd(),
-        path
+        pathFile
     )
 
     if (!fs.existsSync(rootToFile)) {
@@ -85,6 +88,7 @@ export class AppController {
           HttpStatus.NOT_FOUND,
       );
     }
+
 
     res.set({
       'Content-Type': mine.contentType(rootToFile),

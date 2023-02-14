@@ -1,0 +1,31 @@
+upstream nfs_guihon_catalogue {
+    server {{ server_name }};
+}
+
+server{
+    server_name {{ server_dns }};
+    client_max_body_size {{ nginx_max_body_size }};
+
+    location / {
+
+        proxy_pass http://nfs_guihon_catalogue;
+    }
+
+    listen [::]:443 ssl;
+    listen 443 ssl;
+    ssl_certificate /etc/letsencrypt/live/{{ server_dns }}/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/{{ server_dns }}/privkey.pem;
+    include /etc/letsencrypt/options-ssl-nginx.conf;
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+}
+
+server{
+     if ($host = {{ server_dns }}) {
+        return 301 https://$host$request_uri;
+    }
+    listen 80;
+    listen [::]:80;
+    server_name {{ server_dns }};
+    return 404;
+
+}

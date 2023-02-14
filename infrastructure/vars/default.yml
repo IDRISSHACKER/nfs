@@ -1,0 +1,7 @@
+app_port: 80
+container_port: 3001
+domain: "nfs.guihon.cm"
+reverse_proxy_file: "templates/nfs.guihon.cm.nginx.j2"
+sites_available_dir: "/etc/nginx/sites-available"
+sites_enabled_dir: "/etc/nginx/sites-enabled"
+nginx_max_body_size: 4M

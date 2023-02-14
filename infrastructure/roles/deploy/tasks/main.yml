@@ -1,0 +1,23 @@
+---
+- name: Get username
+  become: false
+  shell:
+    cmd: whoami
+  register: user
+
+- name: Set home username
+  set_fact:
+    username: "{{ user.stdout }}"
+
+- name: show username
+  become: false
+  debug: var=username
+
+- name: Deploy application
+  docker_container:
+    name: nfs
+    image: idrissduval/nfs
+    volumes:
+      - drive
+
+...

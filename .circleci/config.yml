@@ -1,0 +1,59 @@
+version: 2.1
+
+jobs:
+  test:
+    docker:
+      - image: node:latest
+        auth:
+          username: idrissduval
+          password: $DOCKERHUB_PASSWORD
+    steps:
+      - checkout
+
+      - run:
+          name: install pnpm package manager
+          command: pnpm install
+
+      - run:
+          name: Execute test suite
+          command: pnpm install
+
+      - run:
+          name: Install dependencies of app
+          command: apt install docker.io
+
+      - run:
+          name: Update packelist dependcies
+          command: apt update
+
+      - run:
+          name: Install docker to build image
+          command: apt install docker.io
+
+      - run:
+          name: build image
+          command: docker build -t idrissduval/nfs .
+
+      - run:
+          name: save image on docker regisgtry
+          command: docker push -d idrissduval/nfs
+
+  prod:
+    docker:
+      - image: python:latest
+    steps:
+      - checkout
+      - run: pip install ansible
+      - run: apt update
+      - run: apt install sshpass
+      - run: ansible-playbook ./infrastructure/deploy.yml
+      - run: ansible-playbook ./infrastructure/network.yml
+
+workflows:
+ pipeline_nfs:
+    jobs:
+      - test
+      - prod:
+          filters:
+            branches:
+              only: master
