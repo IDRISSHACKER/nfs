@@ -1,3 +1,4 @@
+[![Guihon](https://guihon.cm/favicon.ico)](https://dl.circleci.com/status-badge/redirect/gh/IDRISSHACKER/nfs/tree/master)
 # NSF STORAGE
 
 ## Stay in touch
