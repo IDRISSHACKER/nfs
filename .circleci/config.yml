@@ -1,9 +1,5 @@
 version: 2.1
 
-  - image: node:latest
-    auth:
-      username: idrissduval
-      password: $DOCKERHUB_PASSWORD
 jobs:
   test:
     machine:
