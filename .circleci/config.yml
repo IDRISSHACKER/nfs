@@ -14,6 +14,8 @@ jobs:
           name: update package
           command: apt update
 
+      - run: docker --version
+
       - run:
           name: install docker
           command: apt install docker -y
