@@ -16,7 +16,7 @@ jobs:
 
       - run:
           name: install docker
-          command: apt install docker
+          command: apt install docker -y
 
       - run:
           name: install pnpm package manager
