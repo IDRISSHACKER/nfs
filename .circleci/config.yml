@@ -15,20 +15,12 @@ jobs:
           command: npm install -g pnpm
 
       - run:
-          name: Execute test suite
+          name: Install app dependencies
           command: pnpm install
 
       - run:
-          name: Install dependencies of app
-          command: apt install docker.io
-
-      - run:
-          name: Update packelist dependcies
-          command: apt update
-
-      - run:
-          name: Install docker to build image
-          command: apt install docker.io
+          name: Execute test suite
+          command: pnpm run test
 
       - run:
           name: build image
