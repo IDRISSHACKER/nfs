@@ -12,7 +12,7 @@ jobs:
 
       - run:
           name: install pnpm package manager
-          command: pnpm install
+          command: npm install -g pnpm
 
       - run:
           name: Execute test suite
