@@ -42,7 +42,7 @@ jobs:
 
       - run:
           name: save image on docker regisgtry
-          command: docker push -d idrissduval/nfs
+          command: docker push idrissduval/nfs
 
   prod:
     docker:
