@@ -11,6 +11,14 @@ jobs:
       - checkout
 
       - run:
+          name: update package
+          command: apt update
+
+      - run:
+          name: install docker
+          command: apt install docker
+
+      - run:
           name: install pnpm package manager
           command: npm install -g pnpm
 
