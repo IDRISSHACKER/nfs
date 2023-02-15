@@ -3,7 +3,7 @@ upstream nfs_guihon_catalogue {
 }
 
 server{
-    server_name {{ server_dns }};
+    server_name {{ domain }};
     client_max_body_size {{ nginx_max_body_size }};
 
     location / {
@@ -14,7 +14,7 @@ server{
     listen [::]:443 ssl;
     listen 443 ssl;
     ssl_certificate /etc/letsencrypt/live/{{ domain }}/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/{{ server_dns }}/privkey.pem;
+    ssl_certificate_key /etc/letsencrypt/live/{{ domain }}/privkey.pem;
     include /etc/letsencrypt/options-ssl-nginx.conf;
     ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
 }
