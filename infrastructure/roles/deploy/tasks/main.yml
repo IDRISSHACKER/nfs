@@ -2,6 +2,6 @@
 - name: Build app for production from docker hub
   become: true
   shell:
-    cmd: docker run idrissduval/nfs -p 3001:3000 -v /drive:/app/drive
+    cmd: docker run idrissduval/nfs -p 3001:3000 -v /drive:/app/drive -d
 ...
 
