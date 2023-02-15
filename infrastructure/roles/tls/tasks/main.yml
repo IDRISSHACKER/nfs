@@ -1,11 +1,8 @@
 - name: Copy nginx conf file
   template: src="{{ reverse_proxy_file }}" dest="{{ sites_available_dir }}/nfs.guihon.cm"
 
-- name: Dispatch app to site available
-  become: true
-  file: src="{{ sites_available_dir }}/nfs.guihon.cm" dest="{{ sites_enabled_dir }}/nfs.guihon.cm" state=link force=true
-
 - name: "Get certificate for {{ domain }} and www.{{ domain }}"
+  become: true
   command: "/bin/sh certbot -n --nginx certonly -d {{ domain }} -d www.{{ domain }}"
   args:
     creates: "/etc/letsencrypt/live/{{ domain }}"
@@ -13,3 +10,8 @@
   tags:
     - nginx
     - certbot
+
+- name: Dispatch app to site available
+  become: true
+  file: src="{{ sites_available_dir }}/nfs.guihon.cm" dest="{{ sites_enabled_dir }}/nfs.guihon.cm" state=link force=true
+
