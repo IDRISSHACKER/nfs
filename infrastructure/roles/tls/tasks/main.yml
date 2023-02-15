@@ -3,7 +3,7 @@
 
 - name: "Get certificate for {{ domain }} and www.{{ domain }}"
   become: true
-  command: "certbot -n --nginx certonly -d {{ domain }} -d www.{{ domain }}"
+  command: "certbot -n --nginx certonly -d {{ domain }}"
   args:
     creates: "/etc/letsencrypt/live/{{ domain }}"
   ignore_errors: true
