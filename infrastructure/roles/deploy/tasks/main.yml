@@ -13,7 +13,7 @@
   become: false
   debug: var=username
 
-- name: pulling image
+- name: pulling idrissduval/nfs image
   become: true
   shell:
     cmd: docker image pull idrissduval/nfs
