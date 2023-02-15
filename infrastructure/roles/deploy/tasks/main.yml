@@ -1,37 +1,7 @@
 ---
-- name: Get username
-  become: false
-  shell:
-    cmd: whoami
-  register: user
-
-- name: Set home username
-  set_fact:
-    username: "{{ user.stdout }}"
-
-- name: show username
-  become: false
-  debug: var=username
-
-- name: pulling idrissduval/nfs image
+- name: Build app for production from docker hub
   become: true
   shell:
-    cmd: docker image pull idrissduval/nfs
-  register: app_status
-
-- name: show container status
-  debug: var=app_status
-
-
-- name: start app inside a container
-  become: true
-  docker_container:
-    name: nfs
-    image: idrissduval/nfs
-    state: started
-    ports:
-      - "3001:3000"
-    volumes:
-      - "./drive:/app/drive"
+    cmd: docker run idrissduval/nfs -p 3001:3000 -v /drive:/app/drive
 ...
 
