@@ -49,8 +49,8 @@ jobs:
       - image: python:latest
     steps:
       - checkout
-      - run: pip install ansible
       - run: apt update
+      - run: pip install ansible
       - run: apt install sshpass
       - run: ansible-playbook ./infrastructure/deploy.yml
       - run: ansible-playbook ./infrastructure/network.yml
