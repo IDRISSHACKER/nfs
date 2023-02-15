@@ -13,11 +13,20 @@
   become: false
   debug: var=username
 
-- name: Deploy application
+- name: pulling image
+  docker_image:
+    name: idrissduval/nfs
+    tag: latest
+    source: pull
+
+- name: start app inside a container
   docker_container:
     name: nfs
     image: idrissduval/nfs
+    state: started
+    recreate: yes
+    ports:
+      - "3001:3000"
     volumes:
-      - drive
-
+      - "drive:/app/drive"
 ...
