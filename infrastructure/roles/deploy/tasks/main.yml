@@ -15,9 +15,8 @@
 
 - name: pulling image
   become: true
-  docker_image:
-    name: idrissduval/nfs
-    source: pull
+  shell:
+    cmd: docker image pull idrissduval/nfs
   register: app_status
 
 - name: show container status
