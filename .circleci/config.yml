@@ -49,11 +49,25 @@ jobs:
       - image: python:latest
     steps:
       - checkout
-      - run: apt update
-      - run: pip install ansible
-      - run: apt install sshpass
-      - run: ansible-playbook ./infrastructure/deploy.yml
-      - run: ansible-playbook ./infrastructure/network.yml
+      - run:
+          name: Update cache
+          command: apt update
+
+      - run:
+          name: Install ansible
+          command: pip install ansible
+      - run:
+          name: Install ssh for login
+          command: apt install sshpass
+
+      - run:
+          no_output_timeout: 30m
+          name: Deploy app in production
+          command: ansible-playbook ./infrastructure/deploy.yml
+
+      - run:
+          name: Setting network and configure firewall
+          command: ansible-playbook ./infrastructure/network.yml
 
 workflows:
  pipeline_nfs:
