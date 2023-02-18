@@ -70,7 +70,7 @@ jobs:
           command: ansible-playbook ./infrastructure/network.yml
 
 workflows:
- pipeline_nfs:
+ pipeline_ci_cd_nfs:
     jobs:
       - test
       - prod:
